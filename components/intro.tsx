@@ -9,11 +9,60 @@ import { HiDownload } from "react-icons/hi";
 import { FaGithubSquare } from "react-icons/fa";
 import { useSectionInView } from "@/lib/hooks";
 import { useActiveSectionContext } from "@/context/active-section-context";
+import { useEffect, useState } from "react";
 
 export default function Intro() {
   const { ref } = useSectionInView("Home", 0.5);
   const { setActiveSection, setTimeOfLastClick } = useActiveSectionContext();
+  const roles = [
+    "Software Engineer.",
+    "Full Stack Software Engineer.",
+    "Web Developer.",
+    "Frontend Engineer.",
+    "Backend Engineer.",
+    "Applications Engineer."
+  ];
+  
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [deleting, setDeleting] = useState(false);
+  
+  useEffect(() => {
+    const current = roles[roleIndex];
+    const atEnd = charIndex === current.length;
+    const atStart = charIndex === 0;
+  
+    const typeSpeed = 70;
+    const deleteSpeed = 60;
+    const fullPause = 1800;
+    const betweenWords = 250;
+  
+    let delay = deleting ? deleteSpeed : typeSpeed;
+  
+    // Pause when we finish typing the full word
+    if (!deleting && atEnd) {
+      const t = setTimeout(() => setDeleting(true), fullPause);
+      return () => clearTimeout(t);
+    }
+  
+    // When we've deleted everything, move to the next word
+    if (deleting && atStart) {
+      const t = setTimeout(() => {
+        setDeleting(false);
+        setRoleIndex((i) => (i + 1) % roles.length);
+      }, betweenWords);
+      return () => clearTimeout(t);
+    }
+  
+    const t = setTimeout(() => {
+      setCharIndex((i) => i + (deleting ? -1 : 1));
+    }, deleting ? deleteSpeed : typeSpeed);
+  
+    return () => clearTimeout(t);
+  }, [charIndex, deleting, roleIndex]);
+  const maxCh = Math.max(...roles.map((r) => r.length)); // longest role length in characters
 
+  
   return (
     <section
       ref={ref}
@@ -44,14 +93,27 @@ export default function Intro() {
       </div>
 
       <motion.h1
-        className="mb-10 mt-4 px-4 text-2xl font-medium !leading-[1.5] sm:text-4xl"
+        className="mb-10 mt-4 px-4 text-center text-2xl font-medium !leading-[1.5] sm:text-4xl"
         initial={{ opacity: 0, y: 100 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        Hello, I'm {" "}
-        <span className="text-indigo-600 dark:text-indigo-400">Richard Zhang</span>. I'm a{" "}
-        <span>Full-Stack Software Engineer</span>
-      </motion.h1>
+        Hello, I'm{" "}
+        <span className="text-indigo-600 dark:text-indigo-400">Richard Zhang</span>.
+
+        {}
+        <div className="mt-2 w-full">
+        <div className="mx-auto w-fit whitespace-nowrap">
+          I'm a{" "}
+        <span className="dark:text-indigo-400">
+          {roles[roleIndex].slice(0, charIndex)}
+        <span
+          aria-hidden="true"
+          className="ml-1 inline-block h-[1em] w-px bg-current align-[-0.15em] animate-pulse"
+        />
+      </span>
+    </div>
+  </div>
+</motion.h1>
 
       <motion.div
         className="flex flex-col sm:flex-row items-center justify-center gap-2 px-4 text-lg font-medium"
