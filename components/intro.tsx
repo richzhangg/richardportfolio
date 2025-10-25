@@ -12,12 +12,12 @@ import { useActiveSectionContext } from "@/context/active-section-context";
 
 // Keep roles OUTSIDE the component to avoid the hooks missing-deps warning
 const roles = [
+  "Software Engineer.",
   "Full Stack Software Engineer.",
-  "Web Developer.",
+  "ML/AI Researcher.",
   "Frontend Engineer.",
   "Backend Engineer.",
   "Applications Engineer.",
-  "Software Engineer.",
 ];
 
 export default function Intro() {
