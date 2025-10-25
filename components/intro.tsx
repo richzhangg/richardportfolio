@@ -17,6 +17,7 @@ const roles = [
   "ML/AI Researcher.",
   "Frontend Engineer.",
   "Backend Engineer.",
+  "Cloud/DevOps Engineer.",
   "Applications Engineer.",
 ];
 
