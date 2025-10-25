@@ -84,7 +84,7 @@ export const experiencesData: ExperienceItem[] = [
     iconAlt: "CodingMinds",
     date: "",
   },
-] as const;
+];
 
 
 export const projectsData = [

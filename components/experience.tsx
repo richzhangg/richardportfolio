@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 import SectionHeading from "./section-heading";
 import {
   VerticalTimeline,
@@ -19,10 +20,10 @@ function toLines(desc: string | readonly string[]): string[] {
     .filter(Boolean);
 }
 
-// ==== Tweak these two to your taste ====
+// ==== Tweak these to your taste ====
 const ICON_SIZE = 64; // px (try 56, 64, 72…)
 const ICON_RADIUS = 0; // px; 0 = perfect square, 8 = rounded square
-// =======================================
+// ===================================
 
 export default function Experience() {
   const { ref } = useSectionInView("Experience");
@@ -39,13 +40,24 @@ export default function Experience() {
         {experiencesData.map((item) => {
           const lines = toLines(item.description);
 
-          // If you provided iconSrc in your data, use that PNG; otherwise fall back to any React icon
+          // If you provided iconSrc in your data, render it with next/image; else fall back to any React icon
           const iconNode = item.iconSrc ? (
-            <img
-              src={item.iconSrc}
-              alt={item.iconAlt ?? ""}
-              style={{ width: "100%", height: "100%", objectFit: "contain" }}
-            />
+            <div
+              // this container matches the outer icon box; Image uses fill
+              style={{ width: "100%", height: "100%", position: "relative" }}
+            >
+              <Image
+                src={item.iconSrc}
+                alt={item.iconAlt ?? ""}
+                fill
+                sizes={`${ICON_SIZE}px`}
+                style={{
+                  objectFit: "contain",
+                  borderRadius: ICON_RADIUS,
+                }}
+                priority={false}
+              />
+            </div>
           ) : (
             item.icon ?? null
           );
@@ -67,16 +79,16 @@ export default function Experience() {
                 borderRight: "0.3rem solid rgba(255, 255, 255, 0.30)",
               }}
               iconStyle={{
-                // This styles the OUTER wrapper that is round by default
+                // This styles the OUTER wrapper (round by default)
                 background: "rgba(255, 255, 255, 0.08)",
                 boxShadow: "none",
                 width: ICON_SIZE,
                 height: ICON_SIZE,
-                borderRadius: ICON_RADIUS, // ← square (0) or rounded square (e.g., 8)
+                borderRadius: ICON_RADIUS, // 0 = square, e.g. 8 = rounded square
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                padding: 6, // inner padding so your PNG isn't flush to edges
+                padding: 6, // inner padding around the image
               }}
             >
               <div className="leading-snug space-y-1">
