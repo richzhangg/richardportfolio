@@ -44,8 +44,6 @@ export default function Intro() {
       const t = setTimeout(() => setDeleting(true), fullPause);
       return () => clearTimeout(t);
     }
-
-    // When we've deleted everything, move to the next word
     if (deleting && atStart) {
       const t = setTimeout(() => {
         setDeleting(false);
