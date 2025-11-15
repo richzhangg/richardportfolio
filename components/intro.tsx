@@ -16,7 +16,7 @@ const roles = [
   "Full Stack Software Engineer.",
   "ML/AI Researcher.",
   "Cloud/DevOps Engineer.",
-  "ERP Developer",
+  "ERP Developer.",
   "Applications Engineer.",
   "Frontend Engineer.",
   "Backend Engineer.",

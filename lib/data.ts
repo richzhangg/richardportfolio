@@ -37,6 +37,16 @@ export const links = [
 // lib/data.ts
 export const experiencesData: ExperienceItem[] = [
   {
+    title: "ERP Developer Intern",
+    company: "PacSun",
+    location: "October 2025 - Present",
+    description:
+      ["SQL, Data Validation and Migration to Microsoft D365"],
+    iconSrc: "/pacsun.png",
+    iconAlt: "PacSun",
+    date: "",
+  },
+  {
     title: "Software Development Engineering Intern",
     company: "OinAuto",
     location: "July 2024 - September 2024",
