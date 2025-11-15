@@ -15,10 +15,11 @@ const roles = [
   "Software Engineer.",
   "Full Stack Software Engineer.",
   "ML/AI Researcher.",
+  "Cloud/DevOps Engineer.",
+  "ERP Developer",
+  "Applications Engineer.",
   "Frontend Engineer.",
   "Backend Engineer.",
-  "Cloud/DevOps Engineer.",
-  "Applications Engineer.",
 ];
 
 export default function Intro() {
